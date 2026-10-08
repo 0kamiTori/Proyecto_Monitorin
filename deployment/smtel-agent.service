@@ -1,0 +1,20 @@
+[Unit]
+Description=SMTEL - agente de telemetria tecnica
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/smtel/agent
+ExecStart=/opt/smtel/.venv/bin/python -m smtel_agent --config /etc/smtel/config.json --spool /var/lib/smtel/reports.sqlite
+Restart=on-failure
+RestartSec=30
+# Asignar permisos de lectura de arranque y hardware según las políticas de TI.
+User=smtel
+Group=smtel
+NoNewPrivileges=true
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,17 @@
+node_modules/
+.npm-cache/
+dist/
+.venv/
+__pycache__/
+*.pyc
+data/
+tmp/
+.env
+agent/config.json
+agent/spool/
+coverage/
+.cache/
+backups/
+playwright-report/
+test-results/
+output/

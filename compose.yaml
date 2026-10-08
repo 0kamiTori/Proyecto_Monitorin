@@ -1,0 +1,35 @@
+services:
+  api:
+    build: .
+    restart: unless-stopped
+    environment:
+      SMTEL_PRODUCTION: 'true'
+      SMTEL_DEMO: 'false'
+      HOST: '0.0.0.0'
+      SMTEL_ORIGIN: 'https://${SMTEL_DOMAIN:?Defina SMTEL_DOMAIN}'
+      SMTEL_ADMIN_EMAIL: '${SMTEL_ADMIN_EMAIL:?Defina SMTEL_ADMIN_EMAIL}'
+      SMTEL_ADMIN_PASSWORD: '${SMTEL_ADMIN_PASSWORD:?Defina SMTEL_ADMIN_PASSWORD}'
+    volumes:
+      - smtel_data:/app/data
+      - smtel_backups:/app/backups
+    expose:
+      - '4000'
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    environment:
+      SMTEL_DOMAIN: '${SMTEL_DOMAIN}'
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./deployment/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - api
+volumes:
+  smtel_data:
+  smtel_backups:
+  caddy_data:
+  caddy_config:

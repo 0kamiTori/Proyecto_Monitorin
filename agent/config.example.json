@@ -1,0 +1,9 @@
+{
+  "serverUrl": "https://smtel.laboratorio.edu",
+  "equipmentId": "ID_ENTREGADO_POR_EL_SERVIDOR",
+  "osId": "windows",
+  "token": "CREDENCIAL_DE_ENROLAMIENTO",
+  "hmacSecret": "SECRETO_DE_ENROLAMIENTO",
+  "interval": 30,
+  "storageInterval": 300
+}

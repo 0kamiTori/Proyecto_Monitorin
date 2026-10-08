@@ -1,0 +1,30 @@
+{
+  "name": "smtel",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/api",
+    "apps/web",
+    "packages/shared"
+  ],
+  "scripts": {
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "dev": "concurrently -k -n API,WEB -c green,cyan \"npm run dev -w @smtel/api\" \"npm run dev -w @smtel/web\"",
+    "build": "npm run build -w @smtel/api && npm run build -w @smtel/web",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test -w @smtel/api",
+    "test:load": "npm run test:load -w @smtel/api",
+    "test:e2e": "node scripts/e2e.mjs",
+    "start": "npm run start -w @smtel/api"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "concurrently": "^9.2.1",
+    "prettier": "3.9.9",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}
